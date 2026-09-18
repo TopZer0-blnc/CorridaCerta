@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    tools:context=".NovaCorridaActivity">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Nova Corrida"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitulo">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Card com Origem + Destino + Adicionar parada -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Origem -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="📍"
+                        android:textColor="@color/primary_green"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Origem"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/txtOrigem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Minha localização atual"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@color/divider" />
+
+                <!-- Destino -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="🚩"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Destino"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/edtDestino"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="Digite o destino"
+                            android:inputType="text"
+                            android:padding="0dp"
+                            android:textColor="@color/text_primary"
+                            android:textColorHint="@color/text_secondary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Paradas adicionais, preenchidas dinamicamente pelo Kotlin -->
+                <LinearLayout
+                    android:id="@+id/containerParadas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <TextView
+                    android:id="@+id/btnAdicionarParada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="+ Adicionar parada"
+                    android:textColor="@color/primary_green"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Tipo de viagem -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Tipo de viagem"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupTipoViagem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioSoIda"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_pill_background"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="Só ida"
+                    android:textColor="@color/pill_text_selector"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="1dp" />
+
+                <RadioButton
+                    android:id="@+id/radioIdaVolta"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_pill_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Ida e volta"
+                    android:textColor="@color/pill_text_selector"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+            <!-- Quando será -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Quando será?"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupQuando"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioAgora"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_pill_background"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="Agora"
+                    android:textColor="@color/pill_text_selector"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="1dp" />
+
+                <RadioButton
+                    android:id="@+id/radioAgendar"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_pill_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Agendar"
+                    android:textColor="@color/pill_text_selector"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/txtDataAgendada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/primary_green"
+                android:textStyle="bold" />
+
+            <!-- Vai precisar esperar? -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Vai precisar esperar?"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupEspera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioEsperaNao"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_pill_background"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="Não"
+                    android:textColor="@color/pill_text_selector"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="1dp" />
+
+                <RadioButton
+                    android:id="@+id/radioEsperaSim"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_pill_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Sim"
+                    android:textColor="@color/pill_text_selector"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnCalcularCorrida"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_button_green"
+                android:text="Calcular Corrida"
+                android:textAllCaps="false"
+                android:textColor="@color/background_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Barra de navegação inferior -->
+    <LinearLayout
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface_card"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="🏠\nInício"
+            android:textColor="@color/primary_green"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/navHistorico"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="🕐\nHistórico"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/navAgendados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="📅\nAgendados"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/navConfiguracoes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="⚙️\nConfigurações"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

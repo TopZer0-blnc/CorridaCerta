@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "667806465968",
+    "project_id": "corrida-certa-22841",
+    "storage_bucket": "corrida-certa-22841.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667806465968:android:87defa5ac761e4c3992075",
+        "android_client_info": {
+          "package_name": "com.example.corridacerta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBjblvQ6se5NyFtshjI2RYSw5OmbAD5E4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
