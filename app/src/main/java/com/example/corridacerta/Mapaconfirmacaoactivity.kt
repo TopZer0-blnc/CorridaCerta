@@ -3,6 +3,8 @@ package com.example.corridacerta
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
@@ -14,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import org.maplibre.android.MapLibre
+import org.maplibre.android.annotations.Icon
 import org.maplibre.android.annotations.IconFactory
 import org.maplibre.android.annotations.MarkerOptions
 import org.maplibre.android.annotations.PolylineOptions
@@ -106,7 +109,7 @@ class MapaConfirmacaoActivity : AppCompatActivity() {
                 MarkerOptions()
                     .position(origemLatLng)
                     .title("Origem")
-                    .icon(IconFactory.getInstance(this).fromResource(R.drawable.dot_origem))
+                    .icon(iconeDeDrawable(R.drawable.dot_origem))
             )
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(origemLatLng, 14.0))
 
@@ -122,7 +125,7 @@ class MapaConfirmacaoActivity : AppCompatActivity() {
                     MarkerOptions()
                         .position(destinoLatLng)
                         .title("Destino")
-                        .icon(IconFactory.getInstance(this).fromResource(R.drawable.dot_destino))
+                        .icon(iconeDeDrawable(R.drawable.dot_destino))
                 )
 
                 geocodificarParadasEBuscarRota(origemLatLng, destinoLatLng, map)
@@ -165,6 +168,22 @@ class MapaConfirmacaoActivity : AppCompatActivity() {
                 if (restantes == 0) continuarComParadas()
             }
         }
+    }
+
+    /**
+     * IconFactory.fromResource só funciona com imagens (PNG/JPG). Como
+     * dot_origem/dot_destino são drawables de forma (círculos desenhados por
+     * XML), precisamos "carimbar" o drawable num Bitmap antes de virar Icon —
+     * sem isso o app crashava ao tentar desenhar o marcador.
+     */
+    private fun iconeDeDrawable(resId: Int, tamanhoDp: Int = 24): Icon {
+        val drawable = ContextCompat.getDrawable(this, resId)!!
+        val tamanhoPx = (tamanhoDp * resources.displayMetrics.density).toInt()
+        val bitmap = Bitmap.createBitmap(tamanhoPx, tamanhoPx, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, tamanhoPx, tamanhoPx)
+        drawable.draw(canvas)
+        return IconFactory.getInstance(this).fromBitmap(bitmap)
     }
 
     private fun ajustarCamera(map: MapLibreMap, pontos: List<LatLng>) {

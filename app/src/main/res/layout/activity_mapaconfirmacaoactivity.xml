@@ -70,6 +70,19 @@
         app:layout_constraintStart_toStartOf="@id/mapView"
         app:layout_constraintTop_toBottomOf="@id/mapView" />
 
+    <TextView
+        android:id="@+id/txtAtribuicaoOsm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="Dados do mapa © colaboradores do OpenStreetMap"
+        android:textColor="@color/text_secondary"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@id/mapView"
+        app:layout_constraintStart_toStartOf="@id/mapView"
+        app:layout_constraintTop_toBottomOf="@id/txtStatusRota" />
+
     <!-- Resumo dos pontos -->
     <LinearLayout
         android:id="@+id/cardResumoPontos"
