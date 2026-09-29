@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="background_dark">#0E1621</color>
+    <color name="surface_card">#1B2635</color>
+    <color name="surface_card_light">#26313F</color>
+    <color name="primary_green">#12C48B</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#8996A6</color>
+    <color name="pill_selected">#0A121C</color>
+    <color name="pill_unselected">#2A3644</color>
+    <color name="divider">#2A3644</color>
+    <color name="price_min_bg">#3A1620</color>
+    <color name="price_min_text">#FF6B6B</color>
+    <color name="highlight_bg">#12291F</color>
+    <color name="marker_destino">#FF5C5C</color>
 </resources>
